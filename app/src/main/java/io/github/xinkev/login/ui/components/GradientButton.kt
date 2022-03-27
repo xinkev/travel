@@ -22,17 +22,19 @@ import androidx.compose.ui.unit.dp
 fun GradientButton(
     modifier: Modifier = Modifier,
     gradientBrush: Brush,
+    enabled: Boolean = true,
     onClick: () -> Unit,
     content: @Composable BoxScope.() -> Unit,
 ) {
     Box(
-        modifier = modifier
-            .clip(RoundedCornerShape(10))
-            .background(brush = gradientBrush)
-            .clickable(onClick = onClick, role = Role.Button)
-            .height(42.dp)
-            .fillMaxWidth()
-            .then(modifier),
+        modifier = modifier.then(
+            Modifier
+                .clip(RoundedCornerShape(10))
+                .run { if (enabled) background(brush = gradientBrush) else background(Color.Gray) }
+                .clickable(onClick = onClick, role = Role.Button)
+                .height(45.dp)
+                .fillMaxWidth()
+        ),
         contentAlignment = Alignment.Center
     ) {
         CompositionLocalProvider(LocalContentColor provides Color.White) {

@@ -1,11 +1,12 @@
 package io.github.xinkev.login.navigation
 
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import io.github.xinkev.login.ui.screens.onboarding.OnBoardingScreen
+import io.github.xinkev.login.ui.screens.signup.SignUpScreen
 
 @Composable
 fun MainNavHost() {
@@ -17,7 +18,7 @@ fun MainNavHost() {
             )
         }
         composable("/signup") {
-            Text(text = "Signup")
+            SignUpScreen(goBack = { navController.navigateUp() }, vm = hiltViewModel())
         }
     }
 }
